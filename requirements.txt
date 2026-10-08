@@ -1,0 +1,2 @@
+numpy==2.2.2
+seatable-api==3.0.0
