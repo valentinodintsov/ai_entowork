@@ -1,0 +1,228 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="arch" name="Архитектура ai_entowork">
+    <mxGraphModel dx="1366" dy="776" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2240" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=20;fontStyle=1;" value="Архитектура приложения" vertex="1">
+          <mxGeometry height="40" width="2240" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="g_ai" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=2;fontSize=13;fontStyle=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=6;fillColor=#f8fbff;strokeColor=#6c8ebf;dashed=0;" value="&lt;b&gt;Пакет ai/ — нейросетевой разбор отчёта (numpy, работает офлайн)&lt;/b&gt;" vertex="1">
+          <mxGeometry height="680" width="760" x="920" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="g_train" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;fontSize=11;fontStyle=2;align=right;verticalAlign=bottom;spacingRight=10;spacingBottom=4;fillColor=none;strokeColor=#82b366;dashed=1;" value="&lt;b&gt;Обучение: python -m ai.ai_train&lt;/b&gt;" vertex="1">
+          <mxGeometry height="140" width="460" x="950" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="main" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fontSize=11;spacing=6;fillColor=#ffe6cc;strokeColor=#d79b00;" value="&lt;b&gt;main.py — точка входа&lt;/b&gt;&lt;br&gt;вызывает шаги по порядку; останавливается (sys.exit), если в csv_in нет файла или файл пуст" vertex="1">
+          <mxGeometry height="50" width="1500" x="440" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="skud" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fontSize=11;spacing=6;fillColor=#e1d5e7;strokeColor=#9673a6;" value="&lt;b&gt;СКУД&lt;/b&gt;&lt;br&gt;отчёт «Маршруты движения»&lt;br&gt;(внешняя система)" vertex="1">
+          <mxGeometry height="90" width="170" x="40" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="csv_in" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;size=10;fontSize=11;fillColor=#fff2cc;strokeColor=#d6b656;" value="&lt;b&gt;csv_in/&lt;/b&gt;&lt;br&gt;исходные отчёты&lt;br&gt;windows-1251, «;»" vertex="1">
+          <mxGeometry height="100" width="150" x="250" y="225" as="geometry" />
+        </mxCell>
+        <mxCell id="search" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fontSize=11;spacing=6;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;csv_search.py&lt;/b&gt;&lt;br&gt;csv_search()&lt;br&gt;последний созданный csv&lt;br&gt;или None" vertex="1">
+          <mxGeometry height="90" width="200" x="440" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="read" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fontSize=11;spacing=6;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;csv_read.py&lt;/b&gt;&lt;br&gt;csv_read(file)&lt;br&gt;строки отчёта → list_source" vertex="1">
+          <mxGeometry height="90" width="200" x="680" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="ai_main" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fontSize=11;spacing=6;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;ai/ai_main.py&lt;/b&gt;&lt;br&gt;ai_main(list_source) → list_final&lt;br&gt;разбор на события → пол сотрудников → сборка таблицы из 9 колонок&lt;br&gt;предупреждение «Проверьте пол», если уверенность сети &amp;lt; 90 %" vertex="1">
+          <mxGeometry height="90" width="680" x="960" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="models" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fontSize=11;spacing=6;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;ai/ai_models.py&lt;/b&gt;&lt;br&gt;load_networks()&lt;br&gt;ai_structure() — роли ячеек → события&lt;br&gt;ai_gender() — ФИО → пол" vertex="1">
+          <mxGeometry height="90" width="200" x="960" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="features" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fontSize=11;spacing=6;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;ai/ai_features.py&lt;/b&gt;&lt;br&gt;structure_features() — 525 признаков ячейки&lt;br&gt;gender_features() — 1024 признака ФИО" vertex="1">
+          <mxGeometry height="90" width="200" x="1200" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="writer" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fontSize=11;spacing=6;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;ai/ai_writer_csv.py&lt;/b&gt;&lt;br&gt;ai_writer_csv(list_final)&lt;br&gt;запись итогового файла" vertex="1">
+          <mxGeometry height="90" width="200" x="1440" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="network" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fontSize=11;spacing=6;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;ai/ai_network.py&lt;/b&gt;&lt;br&gt;class Network&lt;br&gt;полносвязная сеть: ReLU + softmax&lt;br&gt;predict / fit (Adam) / save / load" vertex="1">
+          <mxGeometry height="90" width="200" x="960" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="weights" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;size=10;fontSize=11;fillColor=#fff2cc;strokeColor=#d6b656;" value="&lt;b&gt;ai/models/&lt;/b&gt;&lt;br&gt;structure.npz, gender.npz&lt;br&gt;веса обученных сетей" vertex="1">
+          <mxGeometry height="100" width="200" x="1200" y="545" as="geometry" />
+        </mxCell>
+        <mxCell id="nets" parent="1" style="shape=note;whiteSpace=wrap;html=1;size=14;fontSize=11;spacing=8;align=left;verticalAlign=top;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" value="&lt;b&gt;Две нейросети&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;Разбор отчёта&lt;/b&gt;&lt;br&gt;525 → 48 → 9&lt;br&gt;роли ячейки: ФИО, подразделение, дата и время, доступ, дверь, код ключа, вход, выход, прочее&lt;br&gt;&lt;br&gt;&lt;b&gt;Определение пола&lt;/b&gt;&lt;br&gt;1024 → 32 → 2&lt;br&gt;окончания фамилии, имени, отчества (1–4 буквы) и имя целиком → «М» / «Ж»" vertex="1">
+          <mxGeometry height="280" width="200" x="1440" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="train" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fontSize=11;spacing=6;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;ai/ai_train.py&lt;/b&gt;&lt;br&gt;teacher() — разметка правилами&lt;br&gt;synthetic_report()&lt;br&gt;train_structure(), train_gender()" vertex="1">
+          <mxGeometry height="90" width="200" x="960" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="names" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fontSize=11;spacing=6;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;ai/ai_names.py&lt;/b&gt;&lt;br&gt;словарь имён, отчеств, фамилий&lt;br&gt;random_fio() — 16 000 ФИО" vertex="1">
+          <mxGeometry height="90" width="200" x="1200" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="export" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fontSize=11;spacing=6;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;export_to_seatable.py&lt;/b&gt;&lt;br&gt;export_to_seatable(list_final)&lt;br&gt;без дублей: новые строки добавляет,&lt;br&gt;у существующих — пустые «Подразделение» и «Пол»" vertex="1">
+          <mxGeometry height="90" width="200" x="1740" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="env" parent="1" style="shape=note;whiteSpace=wrap;html=1;size=14;fontSize=11;spacing=6;fillColor=#fff2cc;strokeColor=#d6b656;" value="&lt;b&gt;.env / переменные окружения&lt;/b&gt;&lt;br&gt;SEATABLE_API_TOKEN&lt;br&gt;SEATABLE_SERVER_URL&lt;br&gt;SEATABLE_TABLE_NAME" vertex="1">
+          <mxGeometry height="90" width="180" x="1980" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="seatable" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fontSize=11;spacing=6;fillColor=#e1d5e7;strokeColor=#9673a6;" value="&lt;b&gt;SeaTable&lt;/b&gt;&lt;br&gt;table.yanao.ru&lt;br&gt;таблица «Доступ в здание»&lt;br&gt;(seatable-api, нужна сеть)" vertex="1">
+          <mxGeometry height="90" width="200" x="1740" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="csv_out" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;size=10;fontSize=11;fillColor=#fff2cc;strokeColor=#d6b656;" value="&lt;b&gt;csv_out/&lt;/b&gt;&lt;br&gt;ГГГГММДД-ЧЧММСС.csv&lt;br&gt;windows-1251, «,»" vertex="1">
+          <mxGeometry height="100" width="200" x="1740" y="545" as="geometry" />
+        </mxCell>
+        <mxCell id="cols" parent="1" style="shape=note;whiteSpace=wrap;html=1;size=14;fontSize=11;spacing=8;align=left;verticalAlign=top;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" value="&lt;b&gt;Итоговая таблица (list_final, csv_out, SeaTable)&lt;/b&gt;&lt;br&gt;&lt;br&gt;Табельный номер · ФИО · Дата · Время · Доступ · Дверь · Событие · Подразделение · Пол&lt;br&gt;&lt;br&gt;Ключ сравнения строк в SeaTable: Табельный номер, Дата, Время, Доступ, Дверь, Событие" vertex="1">
+          <mxGeometry height="150" width="440" x="440" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="deps" parent="1" style="shape=note;whiteSpace=wrap;html=1;size=14;fontSize=11;spacing=8;align=left;verticalAlign=top;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" value="&lt;b&gt;Зависимости&lt;/b&gt;&lt;br&gt;&lt;br&gt;Python 3.11 · numpy 2.2.2 · seatable-api 3.0.0&lt;br&gt;Обучение читает отчёты из csv_in/ и искусственные отчёты; если весов в ai/models/ нет, сети обучаются при первом запуске main.py" vertex="1">
+          <mxGeometry height="110" width="440" x="440" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" parent="1" style="shape=note;whiteSpace=wrap;html=1;size=14;fontSize=11;spacing=8;align=left;verticalAlign=top;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" value="Условные обозначения" vertex="1">
+          <mxGeometry height="290" width="360" x="40" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="lg0" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fontSize=11;spacing=6;fillColor=#ffe6cc;strokeColor=#d79b00;" value="" vertex="1">
+          <mxGeometry height="22" width="40" x="60" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="lt0" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" value="точка входа" vertex="1">
+          <mxGeometry height="22" width="270" x="112" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="lg1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fontSize=11;spacing=6;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="" vertex="1">
+          <mxGeometry height="22" width="40" x="60" y="462" as="geometry" />
+        </mxCell>
+        <mxCell id="lt1" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" value="модуль рабочего конвейера" vertex="1">
+          <mxGeometry height="22" width="270" x="112" y="462" as="geometry" />
+        </mxCell>
+        <mxCell id="lg2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fontSize=11;spacing=6;fillColor=#d5e8d4;strokeColor=#82b366;" value="" vertex="1">
+          <mxGeometry height="22" width="40" x="60" y="494" as="geometry" />
+        </mxCell>
+        <mxCell id="lt2" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" value="модуль обучения сетей" vertex="1">
+          <mxGeometry height="22" width="270" x="112" y="494" as="geometry" />
+        </mxCell>
+        <mxCell id="lg3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fontSize=11;spacing=6;fillColor=#fff2cc;strokeColor=#d6b656;" value="" vertex="1">
+          <mxGeometry height="22" width="40" x="60" y="526" as="geometry" />
+        </mxCell>
+        <mxCell id="lt3" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" value="каталог / файлы данных" vertex="1">
+          <mxGeometry height="22" width="270" x="112" y="526" as="geometry" />
+        </mxCell>
+        <mxCell id="lg4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fontSize=11;spacing=6;fillColor=#e1d5e7;strokeColor=#9673a6;" value="" vertex="1">
+          <mxGeometry height="22" width="40" x="60" y="558" as="geometry" />
+        </mxCell>
+        <mxCell id="lt4" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" value="внешняя система" vertex="1">
+          <mxGeometry height="22" width="270" x="112" y="558" as="geometry" />
+        </mxCell>
+        <mxCell id="ll0" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;jettySize=auto;strokeWidth=2;strokeColor=#333333;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="60" y="601" as="sourcePoint" />
+            <mxPoint x="100" y="601" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lx0" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" value="поток данных" vertex="1">
+          <mxGeometry height="20" width="280" x="112" y="591" as="geometry" />
+        </mxCell>
+        <mxCell id="ll1" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;jettySize=auto;dashed=1;strokeWidth=1.5;strokeColor=#d79b00;endArrow=open;endFill=0;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="60" y="621" as="sourcePoint" />
+            <mxPoint x="100" y="621" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lx1" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" value="вызов шага из main.py (номер — порядок)" vertex="1">
+          <mxGeometry height="20" width="280" x="112" y="611" as="geometry" />
+        </mxCell>
+        <mxCell id="ll2" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;jettySize=auto;dashed=1;strokeColor=#6c8ebf;endArrow=open;endFill=0;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="60" y="641" as="sourcePoint" />
+            <mxPoint x="100" y="641" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lx2" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" value="вызов / зависимость между модулями" vertex="1">
+          <mxGeometry height="20" width="280" x="112" y="631" as="geometry" />
+        </mxCell>
+        <mxCell id="ll3" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;jettySize=auto;dashed=1;strokeColor=#82b366;endArrow=open;endFill=0;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="60" y="661" as="sourcePoint" />
+            <mxPoint x="100" y="661" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lx3" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" value="используется при обучении" vertex="1">
+          <mxGeometry height="20" width="280" x="112" y="651" as="geometry" />
+        </mxCell>
+        <mxCell id="c1" edge="1" parent="1" source="main" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;jettySize=auto;dashed=1;strokeWidth=1.5;strokeColor=#d79b00;endArrow=open;endFill=0;exitX=0.06666666666666667;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="search" value="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c2" edge="1" parent="1" source="main" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;jettySize=auto;dashed=1;strokeWidth=1.5;strokeColor=#d79b00;endArrow=open;endFill=0;exitX=0.22666666666666666;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="read" value="2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c3" edge="1" parent="1" source="main" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;jettySize=auto;dashed=1;strokeWidth=1.5;strokeColor=#d79b00;endArrow=open;endFill=0;exitX=0.5733333333333334;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="ai_main" value="3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c4" edge="1" parent="1" source="main" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;jettySize=auto;dashed=1;strokeWidth=1.5;strokeColor=#d79b00;endArrow=open;endFill=0;exitX=0.9333333333333333;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="export" value="4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d1" edge="1" parent="1" source="skud" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;jettySize=auto;strokeWidth=2;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="csv_in" value="csv">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d2" edge="1" parent="1" source="csv_in" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;jettySize=auto;strokeWidth=2;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="search" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d3" edge="1" parent="1" source="search" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;jettySize=auto;strokeWidth=2;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="read" value="путь">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d4" edge="1" parent="1" source="read" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;jettySize=auto;strokeWidth=2;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="ai_main" value="list_source">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d5" edge="1" parent="1" source="ai_main" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;jettySize=auto;strokeWidth=2;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="export" value="list_final">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d6" edge="1" parent="1" source="export" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;jettySize=auto;strokeWidth=2;strokeColor=#333333;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="seatable" value="query, batch_append_rows,&lt;br&gt;batch_update_rows">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d7" edge="1" parent="1" source="env" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;jettySize=auto;strokeWidth=2;strokeColor=#333333;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="export" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d8" edge="1" parent="1" source="ai_main" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;jettySize=auto;strokeWidth=2;strokeColor=#333333;exitX=0.8529411764705882;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="writer" value="list_final">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d9" edge="1" parent="1" source="writer" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;jettySize=auto;strokeWidth=2;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="csv_out" value="csv">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1710" y="435" />
+              <mxPoint x="1710" y="595" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a1" edge="1" parent="1" source="ai_main" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;jettySize=auto;dashed=1;strokeColor=#6c8ebf;endArrow=open;endFill=0;exitX=0.14705882352941177;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="models" value="события, пол">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" edge="1" parent="1" source="models" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;jettySize=auto;dashed=1;strokeColor=#6c8ebf;endArrow=open;endFill=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="features" value="признаки">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" edge="1" parent="1" source="models" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;jettySize=auto;dashed=1;strokeColor=#6c8ebf;endArrow=open;endFill=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="network" value="predict">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a4" edge="1" parent="1" source="network" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;jettySize=auto;strokeWidth=2;strokeColor=#333333;startArrow=block;startFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="weights" value="load / save">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a5" edge="1" parent="1" source="models" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;jettySize=auto;dashed=1;strokeColor=#82b366;endArrow=open;endFill=0;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="train" value="train(),&lt;br&gt;если нет весов">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="938" y="457" />
+              <mxPoint x="938" y="755" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="t1" edge="1" parent="1" source="train" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;jettySize=auto;dashed=1;strokeColor=#82b366;endArrow=open;endFill=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="network" value="fit, save">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t2" edge="1" parent="1" source="train" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;jettySize=auto;dashed=1;strokeColor=#82b366;endArrow=open;endFill=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="names" value="random_fio">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t3" edge="1" parent="1" source="train" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=10;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;jettySize=auto;dashed=1;strokeColor=#82b366;endArrow=open;endFill=0;exitX=0.85;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="features" value="признаки">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1130" y="670" />
+              <mxPoint x="1180" y="670" />
+              <mxPoint x="1180" y="515" />
+              <mxPoint x="1300" y="515" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
