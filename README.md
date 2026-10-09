@@ -124,6 +124,61 @@ SEATABLE_TABLE_NAME=Доступ в здание
 Если формат отчёта изменится, положите новый отчёт в `csv_in`, при необходимости поправьте
 правила разметки и переобучите сети.
 
+## Архитектура
+
+Сплошные стрелки — поток данных, пунктирные с номерами — порядок вызовов из `main.py`,
+остальные пунктирные — зависимости между модулями.
+
+```mermaid
+flowchart LR
+    skud(["СКУД<br>отчёт «Маршруты движения»"])
+    csv_in[("csv_in/")]
+    main["main.py<br>точка входа"]
+    search["csv_search.py"]
+    read["csv_read.py"]
+    export["export_to_seatable.py"]
+    env[".env / переменные окружения"]
+    seatable(["SeaTable<br>таблица «Доступ в здание»"])
+    csv_out[("csv_out/")]
+
+    subgraph ai ["Пакет ai/ — нейросети на numpy, работают офлайн"]
+        ai_main["ai_main.py<br>события, пол, итоговая таблица"]
+        models["ai_models.py<br>применение сетей"]
+        features["ai_features.py<br>признаки ячеек и ФИО"]
+        network["ai_network.py<br>class Network"]
+        weights[("models/<br>structure.npz, gender.npz")]
+        writer["ai_writer_csv.py"]
+        subgraph training ["Обучение: python -m ai.ai_train"]
+            train["ai_train.py"]
+            names["ai_names.py<br>словарь ФИО"]
+        end
+    end
+
+    main -. 1 .-> search
+    main -. 2 .-> read
+    main -. 3 .-> ai_main
+    main -. 4 .-> export
+
+    skud --> csv_in --> search
+    search -- путь --> read
+    read -- list_source --> ai_main
+    ai_main -- list_final --> writer --> csv_out
+    ai_main -- list_final --> export --> seatable
+    env --> export
+
+    ai_main -.-> models
+    models -.-> features
+    models -.-> network
+    network <-- load / save --> weights
+    models -. "train(), если нет весов" .-> train
+    train -.-> network
+    train -.-> features
+    train -.-> names
+```
+
+Подробная схема с описанием модулей и обеих сетей — в файле `ai_entowork_architecture.draw`
+(формат draw.io, открывается в [diagrams.net](https://app.diagrams.net) через «Файл → Открыть»).
+
 ## Структура проекта
 
 | Файл | Назначение |
@@ -142,6 +197,7 @@ SEATABLE_TABLE_NAME=Доступ в здание
 | `export_to_seatable.py` | экспорт готовых данных в таблицу SeaTable |
 | `.env` | токен, адрес и имя таблицы SeaTable (в репозиторий не попадает) |
 | `.env.example` | образец файла `.env` без токена |
+| `ai_entowork_architecture.draw` | схема архитектуры приложения (draw.io) |
 
 ## Ограничения
 
