@@ -176,7 +176,7 @@ flowchart LR
     train -.-> names
 ```
 
-Подробная схема с описанием модулей и обеих сетей — в файле `ai_entowork_architecture.draw`
+Подробная схема с описанием модулей и обеих сетей — в файле `ai_entowork_architecture.drawio`
 (формат draw.io, открывается в [diagrams.net](https://app.diagrams.net) через «Файл → Открыть»).
 
 ## Структура проекта
@@ -197,7 +197,7 @@ flowchart LR
 | `export_to_seatable.py` | экспорт готовых данных в таблицу SeaTable |
 | `.env` | токен, адрес и имя таблицы SeaTable (в репозиторий не попадает) |
 | `.env.example` | образец файла `.env` без токена |
-| `ai_entowork_architecture.draw` | схема архитектуры приложения (draw.io) |
+| `ai_entowork_architecture.drawio` | схема архитектуры приложения (draw.io) |
 
 ## Ограничения
 
